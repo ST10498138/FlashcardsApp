@@ -5,9 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="#D5CCE6"
-    android:backgroundTint="#D5CCE6">
+    android:background="#D5CCE6">
 
     <LinearLayout
         android:layout_width="410dp"
@@ -24,75 +22,80 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtNumbQuestion"
+            android:id="@+id/scoreTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
-            android:text="QUESTION1"
+            android:text="Your score is : 0/5"
             android:textColor="#00BCD4"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:text="TextView"
-            android:textSize="20sp"
-            android:textStyle="italic" />
-
-        <RadioButton
-            android:id="@+id/radioBtnTrue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00BCD4"
-            android:text="True"
-            android:textSize="24sp" />
-
-        <RadioButton
-            android:id="@+id/radioBtnFalse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00BCD4"
-            android:text="False"
-            android:textSize="24sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#00BCD4"
-                android:text="Submit"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/btnNext"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="#00BCD4"
-                android:text="Next"
-                android:textSize="24sp" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/feedbackTextVIew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:gravity="center_horizontal"
             android:text="TextView"
             android:textSize="20sp"
             android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reviewButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#4CAF50"
+                android:text="Review"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/restartButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="#03A9F4"
+                android:text="Restart"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/quitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#E02525"
+            android:text="Quit"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtReviewQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtReviewAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtReviewFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="TextView" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
