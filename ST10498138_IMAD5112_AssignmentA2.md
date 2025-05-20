@@ -11,7 +11,7 @@ Functionality
 
 Screenshots
 ### welcome screen 
-![Welcome screen ](Screenshots/Screenshot 2025-05-19 141512.png)
+![Welcome screen](Screenshots/Screenshot 2025-05-19 141512.png)
 
 
 
