@@ -3,12 +3,14 @@ package vcmsa.ci.flashcardapp
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class ScoreActivity : AppCompatActivity() {
+    private val TAG = "ScoreActivity"
 
     private var score = 0
     private var totalQuestions = 0
@@ -29,6 +31,8 @@ class ScoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
+        Log.d(TAG,"ScoreActivity is being initialized.onCreate called")
+
 
         // Retrieve data passed from QuestionActivity
         score = intent.getIntExtra("score", 0)
@@ -37,6 +41,7 @@ class ScoreActivity : AppCompatActivity() {
         allCorrectAnswers = intent.getStringArrayListExtra("allCorrectAnswers")
         userAnswers = intent.getStringArrayListExtra("userAnswers")
 
+        Log.i(TAG,"received data from intent : score= $score , totalQuestions =  $totalQuestions"+"answeredQuestions size = ${answeredQuestions?.size} , ${allCorrectAnswers?.size}"+"userAnswers size${userAnswers?.size}")
         // Retrieve views from the layout
         scoreTextView = findViewById(R.id.scoreTextView)
         feedbackTextView = findViewById(R.id.feedbackTextVIew)
@@ -58,6 +63,7 @@ class ScoreActivity : AppCompatActivity() {
             in 40..59 -> "Not bad, keep practicing."
             else -> "You need to review some concepts."
         }
+        Log.i(TAG , "score and feedback displayed : score = $score,feedback = '$feedbackTextView'.")
 
         // Initially hide the review details TextViews
         txtReviewQuestion.visibility = View.GONE
@@ -66,6 +72,7 @@ class ScoreActivity : AppCompatActivity() {
 
         //review btn
         reviewButton.setOnClickListener {
+            Log.i(TAG , "review btn clicked. display the correct and incorrect answers.")
             if (!answeredQuestions.isNullOrEmpty() && !allCorrectAnswers.isNullOrEmpty() && !userAnswers.isNullOrEmpty()) {
                 val correctList = mutableListOf<Int>()
                 val incorrectList = mutableListOf<Int>()
@@ -105,13 +112,16 @@ class ScoreActivity : AppCompatActivity() {
 
         // Restart btn
         restartButton.setOnClickListener {
+            Log.i(TAG , "restart btn clicked. restarting the quiz.")
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
             finish() // Close the score activity
+            Log.d(TAG,"restarted quiz.MainActivity started , scoreActivity finished")
         }
 
         //quit btn
         quitButton.setOnClickListener {
+            Log.d(TAG , "Application exited via quit btn")
             finishAffinity() // Closes all activities
         }
     }
