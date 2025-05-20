@@ -11,7 +11,7 @@ Functionality
 
 Screenshots
 ### welcome screen 
-Screenshot 2025-05-19 141512.png
+![welcome_screen](<Screenshot 2025-05-19 141512.png>) 
 
 
 
