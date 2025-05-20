@@ -1,9 +1,11 @@
 package vcmsa.ci.flashcardapp
 
 
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
@@ -14,6 +16,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class QuestionActivity : AppCompatActivity() {
+    private val TAG = "QuestionActivity"
 
     private val questions = listOf(
         Question("True or False : Marie Curie was the first woman to receive a Nobel prize", "True"),
@@ -41,6 +44,7 @@ class QuestionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_question)
+        Log.d(TAG , "questionActivity : onCreate called.")
 
         editTextQuestionNum = findViewById(R.id.txtNumbQuestion)
         editTextQuestion = findViewById(R.id.txtQuestion)
@@ -55,15 +59,20 @@ class QuestionActivity : AppCompatActivity() {
             checkAnswer()
         }
 
+
         btnNext.setOnClickListener {
+            Log.d(TAG , "Next button clicked.calling loadNextQuestion().")
             loadNextQuestion()
+
         }
 
         //initialize the display of the first question
         displayQuestion()
+        Log.i(TAG, "initial display of question number : ${currentQuestionIndex + 1}")
 
         // initially the next button is disabled
         btnNext.isEnabled = false
+        Log.d(TAG,"Next button initially disabled")
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -81,14 +90,17 @@ class QuestionActivity : AppCompatActivity() {
             radioBtnTrue.isChecked = false // uncheck the radio btn
             radioBtnFalse.isChecked = false
             btnSubmit.isEnabled = true // activate the submit btn for the new question
+            Log.i(TAG, "displaying question no. ${currentQuestionIndex + 1}:'${question.text}'")
             btnNext.isEnabled = false //uncheck the next btn until the submission
         } else {
             //navigate to the score screen when all the the question were answered
+            Log.d(TAG, "All questions answered . Navigate to the score screen.")
             navigateToScoreScreen()
         }
     }
 
     private fun checkAnswer() {
+        Log.d(TAG, "Entering check answer function.")
         if (currentQuestionIndex < questions.size) {
             val currentQuestion = questions[currentQuestionIndex]
             val userAnswer = when {
@@ -100,17 +112,23 @@ class QuestionActivity : AppCompatActivity() {
             userAnswers.add(userAnswer) // Store the user's answer
 
             editTextFeedback.visibility = View.VISIBLE // make feedback visible
-
+            Log.d(TAG, "user selected:'$userAnswer'")
             if (userAnswer.isNotEmpty()) {
+                Log.i(TAG, "user has selected an answer.proceeding to validate .")
+
                 if (userAnswer == currentQuestion.correctAnswer) {
+                    Log.i(TAG, "question ${currentQuestionIndex + 1} : correct answer selected.")
                     editTextFeedback.text = "Correct !\n${getAnecdote(currentQuestionIndex)}"
                     correctAnswersCount++
                 } else {
+                    Log.i(TAG,"Answer is incorrect for the question ${currentQuestionIndex + 1}. correct answer was: ${currentQuestion.correctAnswer}")
                     editTextFeedback.text = "Incorrect !\nThe correct answer was : ${currentQuestion.correctAnswer}\n${getAnecdote(currentQuestionIndex)}"
                 }
                 btnSubmit.isEnabled = false
                 btnNext.isEnabled = true
+                Log.d(TAG,"feedback displayed.submit button disabled , next btn enable")
             } else {
+                Log.w(TAG,"user attempted to submit without selecting an answer.displaying warning")
                 editTextFeedback.text = "Please select an answer."
             }
         }
@@ -122,19 +140,23 @@ class QuestionActivity : AppCompatActivity() {
             displayQuestion()
         } else {
             editTextFeedback.visibility = View.VISIBLE // feedback must be visible
+            Log.d(TAG,"no answer selected.submit btn remains enabled , next btn remains disabled")
             editTextFeedback.text = "Please submit your answer before moving on."
         }
     }
 
     private fun navigateToScoreScreen() {
+        Log.d(TAG , "navigateToScoreScreen called . starting the navigation to scoreActivity ")
         val intent = Intent(this, ScoreActivity::class.java)
         intent.putExtra("score", correctAnswersCount)
         intent.putExtra("totalQuestions", questions.size)
         intent.putStringArrayListExtra("answeredQuestions", answeredQuestionsList) // Pass the questions
         intent.putStringArrayListExtra("allCorrectAnswers", allCorrectAnswers) // Pass the correct answers
         intent.putStringArrayListExtra("userAnswers", userAnswers as ArrayList<String>) // Pass the user's answers
+        Log.i(TAG,"starting scoreActivity with intent extras : score = $correctAnswersCount, totalQuestions = ${questions.size}")
         startActivity(intent)
         finish() // close activity question
+        Log.d(TAG,"navigateToScoreScreen() finished . QuestionActivity finished. ")
 
     }
 
