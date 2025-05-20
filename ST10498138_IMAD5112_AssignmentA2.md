@@ -24,6 +24,29 @@ https://youtube.com/shorts/6jpxxxzUiZc?feature=share
    clear typography : Legible fonts and appropriate text sizes for easy comprehension of all information,
    Easy-to-use-controls : Buttons (submit,Next,Review,Restar,Quit) and radio buttons are cleary labeled and strategically placed for straightforward interaction
    I chose the colors pale purples and sky blues , for their association with concentration and serenity.Providing a unified and calming user experience across all screens.
+## code Architecture
+  The application's architecture is structured primarily around the Activity class, which serves as the controller in the Model-View-Controller (MVC) pattern.
+  Activity Class
+    MainActivity:
+      The entry point of the application.
+      Handles the initiation of the quiz.
+    QuestionActivity:
+      Manages the display of quiz questions and user interaction.
+      Handles user input, answer validation, and navigation to the ScoreActivity.
+    ScoreActivity:
+      Displays the final score and provides options for reviewing, restarting, or quitting the quiz.
+  View Layer
+    XML layouts are used to define the user interface for each activity.
+      activity_main.xml
+      activity_question.xml
+      activity_score.xml
+    The views are manipulated programmatically within the Activity classes.
+  Control Layer
+    The Activity classes handle user interactions, update the views, and manage the flow of data between views.
+  Data Management
+    The application uses intents to pass data between activities.
+    Questions and answers are managed within the Activity classes.
+
 
 ## Functionality
  this aplication is an interactive "true or False" flashcard quiz on facts from general history . it allows users to test their knowledge ,
@@ -32,11 +55,12 @@ https://youtube.com/shorts/6jpxxxzUiZc?feature=share
 
 ## Functionality and Screenshots
  ### welcome screen 
- <<<<<<< HEAD
+
  ![welcome_screen](<Screenshot 2025-05-19 141512.png>)
   This is the screen you will find upon opening the aplication .You will see a welcome phrase (textView), another textView showing you what you will do
   on this app and a button allowing you to switch to the next screen and start the quiz . 
  ### Activity question
+
  ![Activity_question1](<Screenshots/Screenshot 2025-05-19 141542.png>)
   On this screen , the various questions will be presented to you.
   You will select your answer using the radio buttons provides. 
